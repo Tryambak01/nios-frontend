@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
+import { BACKEND_URL } from '../utils';
 
 type Message = {
   id: number;
@@ -44,7 +45,7 @@ function ChatInterface() {
     setGeneratingResponse(true);
 
     try {
-      const response = await axios.post<{ answer: string }>("http://localhost:3001/api/ask", { question: inputValue });
+      const response = await axios.post<{ answer: string }>(`${BACKEND_URL}/api/ask`, { question: inputValue });
 
       const botResponse: Message = {
         id: messages.length + 2,
